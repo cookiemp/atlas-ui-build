@@ -344,7 +344,7 @@ export default function KnowledgeGraph() {
           </div>
 
           {/* Graph Stats */}
-          <div className="absolute bottom-4 right-80 z-10">
+          <div className="absolute bottom-4 left-20 z-10">
             <div className="glass-panel rounded-lg px-4 py-2 flex items-center gap-4">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-atlas-gold" />
@@ -369,11 +369,8 @@ export default function KnowledgeGraph() {
         </main>
 
         {/* Sidebar - Node Details */}
-        <aside className={cn(
-          "w-80 bg-atlas-bg-secondary border-l border-atlas-border flex flex-col shrink-0 transition-transform duration-300",
-          selectedNode ? "translate-x-0" : "translate-x-full"
-        )}>
-          {selectedNode ? (
+        {selectedNode && (
+        <aside className="w-80 bg-atlas-bg-secondary border-l border-atlas-border flex flex-col shrink-0">
             <div className="flex flex-col h-full">
               {/* Header */}
               <div className="p-6 border-b border-atlas-border">
@@ -418,8 +415,8 @@ export default function KnowledgeGraph() {
                   <ul className="space-y-2">
                     {selectedNode.keypoints.map((point, index) => (
                       <li key={index} className="flex items-start gap-2 text-sm">
-                        <span className="w-1.5 h-1.5 rounded-full bg-atlas-gold mt-1.5 flex-shrink-0" />
-                        <span className="text-atlas-text-secondary">{point}</span>
+                        <span className="text-atlas-gold mt-1.5">•</span>
+                        <span className="font-body text-atlas-text-secondary">{point}</span>
                       </li>
                     ))}
                   </ul>
@@ -429,59 +426,51 @@ export default function KnowledgeGraph() {
                 <section>
                   <h3 className="font-display font-semibold text-atlas-text-primary text-sm uppercase tracking-wider mb-3 flex items-center gap-2">
                     <MapPin className="w-4 h-4 text-atlas-gold" />
-                    Related Waypoints
+                    Appears In
                   </h3>
                   <div className="space-y-2">
                     {selectedNode.waypoints.map((waypoint, index) => (
-                      <button
-                        key={index}
-                        className="w-full flex items-center gap-3 p-3 rounded-lg bg-atlas-bg-tertiary border border-atlas-border hover:border-atlas-gold/50 transition-colors text-left"
-                      >
-                        <div className="w-8 h-8 rounded-lg bg-atlas-gold/10 flex items-center justify-center">
-                          <MapPin className="w-4 h-4 text-atlas-gold" />
+                      <div key={index} className="p-3 bg-atlas-bg-tertiary rounded-lg border border-atlas-border/50 hover:border-atlas-gold/30 transition-colors group cursor-pointer">
+                        <div className="flex items-center justify-between">
+                          <span className="font-body text-sm text-atlas-text-primary group-hover:text-atlas-gold transition-colors">{waypoint}</span>
+                          <ExternalLink className="w-3.5 h-3.5 text-atlas-text-muted group-hover:text-atlas-gold transition-colors" />
                         </div>
-                        <span className="font-body text-sm text-atlas-text-secondary">{waypoint}</span>
-                      </button>
+                      </div>
                     ))}
                   </div>
                 </section>
 
                 {/* References */}
+                {selectedNode.references && selectedNode.references.length > 0 && (
                 <section>
                   <h3 className="font-display font-semibold text-atlas-text-primary text-sm uppercase tracking-wider mb-3 flex items-center gap-2">
-                    <ExternalLink className="w-4 h-4 text-atlas-gold" />
+                    <BookOpenCheck className="w-4 h-4 text-atlas-gold" />
                     References
                   </h3>
-                  <a 
-                    href="#"
-                    className="flex items-center gap-2 text-sm text-atlas-gold hover:underline"
-                  >
-                    <ExternalLink className="w-3.5 h-3.5" />
-                    Official Documentation
-                  </a>
+                  <div className="space-y-2">
+                    {selectedNode.references.map((ref, index) => (
+                      <a key={index} href="#" className="flex items-center gap-2 p-3 bg-atlas-bg-tertiary rounded-lg border border-atlas-border/50 hover:border-atlas-gold/30 transition-colors group">
+                        <ExternalLink className="w-3.5 h-3.5 text-atlas-text-muted group-hover:text-atlas-gold transition-colors shrink-0" />
+                        <span className="font-body text-sm text-atlas-text-secondary group-hover:text-atlas-gold transition-colors">{ref}</span>
+                      </a>
+                    ))}
+                  </div>
                 </section>
+                )}
               </div>
 
-              {/* Footer Actions */}
-              <div className="p-4 border-t border-atlas-border bg-atlas-bg-tertiary/50">
-                <button className="w-full py-2.5 rounded-lg bg-atlas-gold hover:bg-atlas-gold-hover text-atlas-bg-primary font-body font-semibold text-sm transition-colors duration-200 flex items-center justify-center gap-2">
-                  <BookOpenCheck className="w-4 h-4" />
-                  Open Field Guide
+              {/* Actions */}
+              <div className="p-4 border-t border-atlas-border space-y-2">
+                <button className="w-full py-2.5 px-4 rounded-lg bg-atlas-gold hover:bg-atlas-gold-hover text-atlas-bg-primary font-display font-semibold text-sm transition-all duration-200">
+                  Review Concept
+                </button>
+                <button className="w-full py-2.5 px-4 rounded-lg bg-atlas-bg-tertiary border border-atlas-border hover:border-atlas-gold/50 text-atlas-text-secondary font-display font-medium text-sm transition-all duration-200">
+                  Go to Waypoint
                 </button>
               </div>
             </div>
-          ) : (
-            <div className="flex-1 flex flex-col items-center justify-center p-8 text-center">
-              <div className="w-16 h-16 rounded-2xl bg-atlas-bg-tertiary border border-atlas-border flex items-center justify-center mb-4">
-                <svg className="w-8 h-8 text-atlas-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
-                </svg>
-              </div>
-              <h3 className="font-display font-semibold text-atlas-text-primary mb-2">Explore the Atlas</h3>
-              <p className="font-body text-sm text-atlas-text-muted">Click on any node to view concept details, related waypoints, and references.</p>
-            </div>
-          )}
         </aside>
+        )}
       </div>
     </div>
   );
