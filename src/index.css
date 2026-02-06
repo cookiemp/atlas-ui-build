@@ -1,96 +1,77 @@
+@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&f[]=satoshi@400,500,600,700&f[]=jetbrains-mono@400,500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* AtlasED Dark Theme Design System */
+    --background: 0 0% 6%;
+    --foreground: 0 0% 100%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 41 56% 58%;
+    --primary-foreground: 0 0% 6%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 0 0% 14%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 0 0% 16%;
+    --input: 0 0% 16%;
+    --ring: 41 56% 58%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Atlas-specific semantic colors */
+    --atlas-bg-primary: 0 0% 6%;
+    --atlas-bg-secondary: 0 0% 10%;
+    --atlas-bg-tertiary: 0 0% 14%;
+    
+    --atlas-gold: 41 56% 58%;
+    --atlas-gold-hover: 41 60% 66%;
+    --atlas-gold-muted: 40 43% 44%;
+    --atlas-gold-light: 45 77% 76%;
+    
+    --atlas-text-primary: 0 0% 100%;
+    --atlas-text-secondary: 0 0% 64%;
+    --atlas-text-muted: 0 0% 45%;
+    
+    --atlas-border: 0 0% 16%;
+    
+    --atlas-success: 142 71% 65%;
+    --atlas-warning: 45 93% 55%;
+    --atlas-error: 0 84% 60%;
+    --atlas-info: 217 91% 68%;
+    
+    /* Category colors for Knowledge Graph */
+    --category-fundamentals: 217 91% 68%;
+    --category-advanced: 41 56% 58%;
+    --category-practical: 142 71% 65%;
+    --category-theory: 330 81% 71%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 0 0% 10%;
+    --sidebar-foreground: 0 0% 64%;
+    --sidebar-primary: 41 56% 58%;
+    --sidebar-primary-foreground: 0 0% 6%;
+    --sidebar-accent: 0 0% 14%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 16%;
+    --sidebar-ring: 41 56% 58%;
   }
 }
 
@@ -100,6 +81,267 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body antialiased;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Cabinet Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  
+  .font-body {
+    font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--atlas-bg-secondary));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--atlas-border));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--atlas-gold));
+}
+
+/* Animations */
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes progressFill {
+  from { width: 0%; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, hsl(var(--atlas-bg-tertiary)) 25%, hsl(var(--atlas-border)) 50%, hsl(var(--atlas-bg-tertiary)) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-modal-enter {
+  animation: modalEnter 0.3s ease-out;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 1.5s linear infinite;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+.animate-progress-fill {
+  animation: progressFill 0.8s ease-out forwards;
+}
+
+/* Glass Panel Effect */
+.glass-panel {
+  background: hsla(var(--atlas-bg-secondary) / 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid hsla(var(--atlas-gold) / 0.15);
+}
+
+/* Input Focus Glow */
+.input-glow:focus {
+  box-shadow: 0 0 0 2px hsla(var(--atlas-gold) / 0.2);
+}
+
+/* Progress Bar Gradient */
+.progress-bar-gradient {
+  background: linear-gradient(90deg, hsl(var(--atlas-gold)) 0%, hsl(var(--atlas-gold-hover)) 100%);
+}
+
+/* Gold Glow Effect */
+.glow-gold {
+  box-shadow: 0 0 40px hsla(var(--atlas-gold) / 0.15);
+}
+
+/* Map Pattern for Empty States */
+.map-pattern {
+  background-image: radial-gradient(circle at 2px 2px, hsla(var(--atlas-gold) / 0.15) 1px, transparent 0);
+  background-size: 40px 40px;
+}
+
+/* Difficulty Badge Glow Effects */
+.difficulty-easy {
+  box-shadow: 0 0 12px hsla(var(--atlas-success) / 0.15);
+}
+
+.difficulty-medium {
+  box-shadow: 0 0 12px hsla(var(--atlas-warning) / 0.15);
+}
+
+.difficulty-hard {
+  box-shadow: 0 0 12px hsla(var(--atlas-error) / 0.15);
+}
+
+/* Quiz Option Styles */
+.quiz-option {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.quiz-option:hover:not(.selected):not(.disabled) {
+  background: hsl(0 0% 12%);
+  border-color: hsl(0 0% 23%);
+}
+
+.quiz-option.selected {
+  background: hsla(var(--atlas-gold) / 0.1);
+  border-color: hsl(var(--atlas-gold));
+}
+
+.quiz-option.correct {
+  background: hsla(var(--atlas-success) / 0.1);
+  border-color: hsl(var(--atlas-success));
+}
+
+.quiz-option.incorrect {
+  background: hsla(var(--atlas-error) / 0.1);
+  border-color: hsl(var(--atlas-error));
+}
+
+/* Waypoint Row Hover */
+.waypoint-row {
+  transition: all 0.2s ease;
+}
+
+.waypoint-row:hover {
+  background-color: hsl(var(--atlas-bg-tertiary));
+  transform: translateX(4px);
+}
+
+/* Checkpoint Card Hover */
+.checkpoint-card {
+  transition: all 0.2s ease-out;
+}
+
+.checkpoint-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Tab Content Transition */
+.tab-content {
+  transition: opacity 0.2s ease;
+}
+
+/* Code Block Styling */
+.code-block {
+  background: hsl(0 0% 4%);
+  border: 1px solid hsl(var(--atlas-border));
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Chat Bubbles */
+.chat-bubble-user {
+  background: hsla(var(--atlas-gold) / 0.12);
+  border: 1px solid hsla(var(--atlas-gold) / 0.25);
+}
+
+.chat-bubble-ai {
+  background: hsl(var(--atlas-bg-secondary));
+  border: 1px solid hsl(var(--atlas-border));
+}
+
+/* Knowledge Graph Styles */
+.node-circle {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.node-circle:hover {
+  filter: drop-shadow(0 0 8px currentColor);
+}
+
+.graph-link {
+  stroke-opacity: 0.4;
+  transition: all 0.3s ease;
+}
+
+.graph-link.highlighted {
+  stroke-opacity: 1;
+  stroke-width: 2px;
+}
+
+.graph-link.dimmed {
+  stroke-opacity: 0.1;
+}
+
+.node-label {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 12px;
+  fill: hsl(var(--atlas-text-secondary));
+  pointer-events: none;
+  text-shadow: 0 1px 3px hsla(0 0% 0% / 0.8);
+}
+
+.node-label.highlighted {
+  fill: hsl(var(--atlas-text-primary));
+  font-weight: 500;
+}
+
+.node-label.dimmed {
+  opacity: 0.3;
+}
+
+/* Graph Container Background */
+.graph-container {
+  background-image: 
+    radial-gradient(circle at 20% 50%, hsla(var(--atlas-gold) / 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, hsla(var(--category-fundamentals) / 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, hsla(var(--atlas-success) / 0.02) 0%, transparent 40%);
+}
+
+/* Pause Overlay */
+.pause-overlay {
+  background: hsla(var(--atlas-bg-primary) / 0.85);
+  backdrop-filter: blur(4px);
 }

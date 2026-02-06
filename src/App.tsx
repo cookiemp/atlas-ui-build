@@ -3,7 +3,12 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
+import Dashboard from "./pages/Dashboard";
+import ExpeditionView from "./pages/ExpeditionView";
+import VideoPlayer from "./pages/VideoPlayer";
+import Settings from "./pages/Settings";
+import MemoryCheckpoints from "./pages/MemoryCheckpoints";
+import KnowledgeGraph from "./pages/KnowledgeGraph";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -15,8 +20,12 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/expedition/:id" element={<ExpeditionView />} />
+          <Route path="/player/:id" element={<VideoPlayer />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/memory" element={<MemoryCheckpoints />} />
+          <Route path="/atlas" element={<KnowledgeGraph />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
