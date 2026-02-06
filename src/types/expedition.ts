@@ -76,6 +76,7 @@ export interface KnowledgeNode {
   definition: string;
   keypoints: string[];
   waypoints: string[];
+  references?: string[];
 }
 
 export interface KnowledgeLink {
