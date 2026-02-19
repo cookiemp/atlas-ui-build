@@ -30,74 +30,54 @@ export function NewExpeditionModal({ isOpen, onClose, onSubmit }: NewExpeditionM
 
   const handleUrlChange = (value: string) => {
     setPlaylistUrl(value);
-    if (value && state === 'error') {
-      setState('initial');
-    }
+    if (value && state === 'error') setState('initial');
   };
 
-  const clearUrl = () => {
-    setPlaylistUrl("");
-    setState("initial");
-  };
+  const clearUrl = () => { setPlaylistUrl(""); setState("initial"); };
 
   const handleCreate = () => {
     if (!playlistUrl.trim()) return;
-    
-    // Simulate loading
     setState("loading");
-    
     setTimeout(() => {
-      // Simulate success - in real app, this would validate the URL
-      if (playlistUrl.includes("youtube") || playlistUrl.includes("youtu.be")) {
-        setState("preview");
-      } else {
-        setState("error");
-      }
+      setState(playlistUrl.includes("youtube") || playlistUrl.includes("youtu.be") ? "preview" : "error");
     }, 1500);
   };
 
   const handleSubmit = () => {
     onSubmit(playlistUrl, expeditionName || undefined);
     onClose();
-    // Reset state
-    setPlaylistUrl("");
-    setExpeditionName("");
-    setState("initial");
-  };
-
-  const retry = () => {
-    setState("initial");
+    setPlaylistUrl(""); setExpeditionName(""); setState("initial");
   };
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogOverlay className="bg-black/60 backdrop-blur-sm" />
+      <DialogOverlay className="bg-black/60 backdrop-blur-md" />
       <DialogContent className="animate-modal-enter max-w-2xl p-0 bg-atlas-bg-secondary border-atlas-border rounded-2xl overflow-hidden">
-        {/* Header */}
-        <div className="px-8 pt-8 pb-6 border-b border-atlas-border">
+        {/* Header — Singular focus */}
+        <div className="px-9 pt-9 pb-7 border-b border-atlas-border/50">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-atlas-gold/10 flex items-center justify-center">
+            <div className="flex items-center gap-4">
+              <div className="w-11 h-11 rounded-xl bg-atlas-gold/8 flex items-center justify-center">
                 <Compass className="w-5 h-5 text-atlas-gold" />
               </div>
               <div>
                 <h2 className="font-display text-xl font-bold text-atlas-text-primary">Add New Expedition</h2>
-                <p className="text-sm text-atlas-text-muted mt-0.5">Transform a YouTube playlist into a structured learning journey</p>
+                <p className="text-sm text-atlas-text-muted mt-1">Transform a YouTube playlist into a structured learning journey</p>
               </div>
             </div>
             <button 
               onClick={onClose}
-              className="w-8 h-8 rounded-lg flex items-center justify-center text-atlas-text-muted hover:text-atlas-text-primary hover:bg-atlas-bg-tertiary transition-all duration-200"
+              className="w-9 h-9 rounded-xl flex items-center justify-center text-atlas-text-muted hover:text-atlas-text-primary hover:bg-atlas-bg-tertiary transition-all duration-300"
             >
               <X className="w-[18px] h-[18px]" />
             </button>
           </div>
         </div>
 
-        {/* Body */}
-        <div className="px-8 py-6">
+        {/* Body — Generous padding */}
+        <div className="px-9 py-7">
           {/* YouTube URL Input */}
-          <div className="space-y-2 mb-5">
+          <div className="space-y-2.5 mb-6">
             <label className="block text-sm font-medium text-atlas-text-secondary">
               YouTube Playlist URL <span className="text-atlas-gold">*</span>
             </label>
@@ -110,12 +90,12 @@ export function NewExpeditionModal({ isOpen, onClose, onSubmit }: NewExpeditionM
                 value={playlistUrl}
                 onChange={(e) => handleUrlChange(e.target.value)}
                 placeholder="Paste playlist URL"
-                className="input-glow w-full bg-atlas-bg-tertiary border border-atlas-border rounded-xl pl-11 pr-10 py-3.5 text-atlas-text-primary placeholder-atlas-text-muted focus:outline-none focus:border-atlas-gold/50 transition-all duration-200"
+                className="input-glow w-full bg-atlas-bg-tertiary border border-atlas-border rounded-xl pl-11 pr-10 py-4 text-atlas-text-primary placeholder-atlas-text-muted focus:outline-none transition-all duration-300"
               />
               {playlistUrl && (
                 <button 
                   onClick={clearUrl}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-atlas-text-muted hover:text-atlas-text-primary"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-atlas-text-muted hover:text-atlas-text-primary transition-colors duration-300"
                 >
                   <XCircle className="w-[18px] h-[18px]" />
                 </button>
@@ -127,8 +107,8 @@ export function NewExpeditionModal({ isOpen, onClose, onSubmit }: NewExpeditionM
             </p>
           </div>
 
-          {/* Expedition Name Input */}
-          <div className="space-y-2 mb-6">
+          {/* Name Input */}
+          <div className="space-y-2.5 mb-7">
             <label className="block text-sm font-medium text-atlas-text-secondary">
               Expedition Name <span className="text-atlas-text-muted font-normal">(optional)</span>
             </label>
@@ -141,16 +121,16 @@ export function NewExpeditionModal({ isOpen, onClose, onSubmit }: NewExpeditionM
                 value={expeditionName}
                 onChange={(e) => setExpeditionName(e.target.value)}
                 placeholder="Leave blank to use playlist title"
-                className="input-glow w-full bg-atlas-bg-tertiary border border-atlas-border rounded-xl pl-11 pr-4 py-3.5 text-atlas-text-primary placeholder-atlas-text-muted focus:outline-none focus:border-atlas-gold/50 transition-all duration-200"
+                className="input-glow w-full bg-atlas-bg-tertiary border border-atlas-border rounded-xl pl-11 pr-4 py-4 text-atlas-text-primary placeholder-atlas-text-muted focus:outline-none transition-all duration-300"
               />
             </div>
           </div>
 
-          {/* Loading State */}
+          {/* Loading State — Celebratory spinner */}
           {state === "loading" && (
-            <div className="py-8">
+            <div className="py-10 animate-fade-in">
               <div className="flex flex-col items-center justify-center">
-                <div className="relative w-12 h-12 mb-4">
+                <div className="relative w-14 h-14 mb-5">
                   <div className="absolute inset-0 rounded-full border-2 border-atlas-bg-tertiary" />
                   <div className="absolute inset-0 rounded-full border-2 border-atlas-gold border-t-transparent animate-spin-slow" />
                 </div>
@@ -160,20 +140,20 @@ export function NewExpeditionModal({ isOpen, onClose, onSubmit }: NewExpeditionM
             </div>
           )}
 
-          {/* Error State */}
+          {/* Error State — Semantic red */}
           {state === "error" && (
-            <div className="mb-6">
-              <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-red-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <XCircle className="w-4 h-4 text-red-400" />
+            <div className="mb-7 animate-fade-in">
+              <div className="bg-atlas-error/5 border border-atlas-error/15 rounded-xl p-5">
+                <div className="flex items-start gap-4">
+                  <div className="w-9 h-9 rounded-xl bg-atlas-error/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <XCircle className="w-4 h-4 text-atlas-error" />
                   </div>
                   <div className="flex-1">
                     <p className="text-atlas-text-primary font-medium mb-1">Unable to fetch playlist</p>
-                    <p className="text-sm text-red-400/80 mb-3">The playlist URL appears to be invalid or the playlist is private.</p>
+                    <p className="text-sm text-atlas-error/70 mb-4">The playlist URL appears to be invalid or the playlist is private.</p>
                     <button
-                      onClick={retry}
-                      className="inline-flex items-center gap-2 text-sm font-medium text-red-400 hover:text-red-300 transition-colors"
+                      onClick={() => setState("initial")}
+                      className="inline-flex items-center gap-2 text-sm font-medium text-atlas-error hover:text-atlas-error/80 transition-colors duration-300"
                     >
                       <RefreshCw className="w-3.5 h-3.5" />
                       Try again
@@ -186,32 +166,32 @@ export function NewExpeditionModal({ isOpen, onClose, onSubmit }: NewExpeditionM
 
           {/* Preview Grid */}
           {state === "preview" && (
-            <div>
+            <div className="animate-fade-in">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-sm font-medium text-atlas-text-secondary">
-                  Videos found <span className="text-atlas-text-primary ml-1">({videoCount})</span>
+                  Videos found <span className="text-atlas-text-primary ml-1 tabular-nums">({videoCount})</span>
                 </h3>
                 <span className="text-xs text-atlas-text-muted">Preview</span>
               </div>
 
-              <div className="bg-atlas-bg-tertiary rounded-xl p-4 border border-atlas-border">
+              <div className="bg-atlas-bg-tertiary/50 rounded-xl p-5 border border-atlas-border">
                 <div className="grid grid-cols-4 gap-3">
                   {sampleThumbnails.map((thumb, index) => (
                     <div
                       key={index}
                       className={cn(
-                        "aspect-video rounded-lg bg-gradient-to-br border border-atlas-border overflow-hidden cursor-pointer relative group animate-fade-in",
+                        "aspect-video rounded-xl bg-gradient-to-br border border-atlas-border overflow-hidden cursor-pointer relative group animate-fade-in",
                         thumb.color
                       )}
                       style={{ animationDelay: `${index * 50}ms` }}
                     >
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <Play className="w-6 h-6 text-white/30 group-hover:text-white/60 transition-colors" />
+                        <Play className="w-6 h-6 text-white/25 group-hover:text-white/60 group-hover:scale-110 transition-all duration-300" />
                       </div>
                       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
                         <p className="text-[10px] text-white/80 truncate">{thumb.title} {index + 1}</p>
                       </div>
-                      <div className="absolute top-2 right-2 w-5 h-5 rounded bg-black/50 flex items-center justify-center text-[10px] text-white/80 font-medium">
+                      <div className="absolute top-2 right-2 w-5 h-5 rounded-md bg-black/50 flex items-center justify-center text-[10px] text-white/80 font-medium tabular-nums">
                         {index + 1}
                       </div>
                     </div>
@@ -219,7 +199,7 @@ export function NewExpeditionModal({ isOpen, onClose, onSubmit }: NewExpeditionM
                 </div>
 
                 {videoCount > 8 && (
-                  <div className="mt-3 pt-3 border-t border-atlas-border text-center">
+                  <div className="mt-4 pt-4 border-t border-atlas-border/50 text-center">
                     <span className="text-sm text-atlas-text-muted">And {videoCount - 8} more videos</span>
                   </div>
                 )}
@@ -228,19 +208,19 @@ export function NewExpeditionModal({ isOpen, onClose, onSubmit }: NewExpeditionM
           )}
         </div>
 
-        {/* Footer */}
-        <div className="px-8 py-5 border-t border-atlas-border bg-atlas-bg-secondary">
+        {/* Footer — Primary CTA pops, secondary ghost */}
+        <div className="px-9 py-6 border-t border-atlas-border/50 bg-atlas-bg-secondary">
           <div className="flex items-center justify-end gap-3">
             <button
               onClick={onClose}
-              className="px-5 py-2.5 rounded-xl text-atlas-text-secondary font-medium hover:text-atlas-text-primary hover:bg-atlas-bg-tertiary transition-all duration-200"
+              className="btn-ghost px-6 py-3 rounded-xl text-atlas-text-secondary font-medium hover:text-atlas-text-primary active:scale-[0.98]"
             >
               Cancel
             </button>
             {state === "preview" ? (
               <button
                 onClick={handleSubmit}
-                className="px-6 py-2.5 rounded-xl bg-atlas-gold text-atlas-bg-primary font-semibold hover:bg-atlas-gold-hover transition-all duration-200 flex items-center gap-2"
+                className="btn-premium px-7 py-3 rounded-xl bg-atlas-gold text-atlas-bg-primary font-semibold hover:bg-atlas-gold-hover flex items-center gap-2"
               >
                 <span>Create Expedition</span>
                 <ArrowRight className="w-4 h-4" />
@@ -249,7 +229,7 @@ export function NewExpeditionModal({ isOpen, onClose, onSubmit }: NewExpeditionM
               <button
                 onClick={handleCreate}
                 disabled={!playlistUrl.trim() || state === 'loading'}
-                className="px-6 py-2.5 rounded-xl bg-atlas-gold text-atlas-bg-primary font-semibold hover:bg-atlas-gold-hover disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-atlas-gold transition-all duration-200 flex items-center gap-2"
+                className="btn-premium px-7 py-3 rounded-xl bg-atlas-gold text-atlas-bg-primary font-semibold hover:bg-atlas-gold-hover disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-atlas-gold disabled:hover:shadow-none disabled:hover:translate-y-0 flex items-center gap-2"
               >
                 <span>Fetch Playlist</span>
                 <ArrowRight className="w-4 h-4" />

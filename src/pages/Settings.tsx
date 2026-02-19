@@ -24,27 +24,17 @@ export default function Settings() {
   });
 
   const handleValidate = () => {
-    if (!apiKey) {
-      setValidationState('error');
-      return;
-    }
-    
+    if (!apiKey) { setValidationState('error'); return; }
     setIsValidating(true);
     setTimeout(() => {
       setIsValidating(false);
-      if (apiKey.startsWith('AI')) {
-        setValidationState('success');
-      } else {
-        setValidationState('error');
-      }
+      setValidationState(apiKey.startsWith('AI') ? 'success' : 'error');
     }, 1500);
   };
 
   const handleSave = () => {
     setIsSaving(true);
-    setTimeout(() => {
-      setIsSaving(false);
-    }, 1000);
+    setTimeout(() => setIsSaving(false), 1000);
   };
 
   const togglePreference = (key: keyof typeof preferences) => {
@@ -52,31 +42,29 @@ export default function Settings() {
   };
 
   return (
-    <AppLayout 
-      headerProps={{ showBack: true, backLabel: "Back", backTo: "/" }}
-    >
-      <main className="max-w-4xl mx-auto px-8 py-10 w-full">
-        {/* Page Header */}
-        <div className="mb-10">
-          <h1 className="font-display font-bold text-3xl tracking-tight mb-2 text-atlas-text-primary">Settings</h1>
+    <AppLayout headerProps={{ showBack: true, backLabel: "Back", backTo: "/" }}>
+      <main className="max-w-4xl mx-auto px-10 py-12 w-full animate-fade-in">
+        {/* Page Header — Bold, singular focus */}
+        <div className="mb-12">
+          <h1 className="font-display font-bold text-3xl mb-3 text-atlas-text-primary">Settings</h1>
           <p className="text-atlas-text-secondary text-base">Configure your AtlasED experience and learning preferences</p>
         </div>
 
-        <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-          {/* API Configuration */}
-          <section className="bg-atlas-bg-secondary rounded-xl border border-atlas-border overflow-hidden">
-            <div className="px-6 py-5 border-b border-atlas-border">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-atlas-gold/10 flex items-center justify-center">
+        <form className="space-y-7" onSubmit={(e) => e.preventDefault()}>
+          {/* API Configuration — Premium card */}
+          <section className="premium-card overflow-hidden">
+            <div className="px-7 py-6 border-b border-atlas-border/50">
+              <div className="flex items-center gap-4">
+                <div className="w-11 h-11 rounded-xl bg-atlas-gold/8 flex items-center justify-center">
                   <Key className="w-5 h-5 text-atlas-gold" />
                 </div>
                 <div>
                   <h2 className="font-display font-bold text-lg text-atlas-text-primary">API Configuration</h2>
-                  <p className="text-atlas-text-muted text-sm">Connect to Gemini AI for enhanced learning features</p>
+                  <p className="text-atlas-text-muted text-sm mt-0.5">Connect to Gemini AI for enhanced learning features</p>
                 </div>
               </div>
             </div>
-            <div className="p-6 space-y-5">
+            <div className="p-7 space-y-5">
               <div>
                 <label className="block text-atlas-text-secondary text-sm uppercase tracking-wide font-medium mb-3">
                   Gemini API Key
@@ -85,17 +73,14 @@ export default function Settings() {
                   <input
                     type={showApiKey ? "text" : "password"}
                     value={apiKey}
-                    onChange={(e) => {
-                      setApiKey(e.target.value);
-                      setValidationState('idle');
-                    }}
+                    onChange={(e) => { setApiKey(e.target.value); setValidationState('idle'); }}
                     placeholder="Enter your Gemini API key"
-                    className="w-full bg-atlas-bg-tertiary border border-atlas-border rounded-xl px-4 py-3.5 pr-24 text-atlas-text-primary placeholder-atlas-text-muted focus:outline-none focus:border-atlas-gold/50 input-glow transition-all duration-200 font-mono text-sm"
+                    className="input-glow w-full bg-atlas-bg-tertiary border border-atlas-border rounded-xl px-5 py-4 pr-24 text-atlas-text-primary placeholder-atlas-text-muted focus:outline-none transition-all duration-300 font-mono text-sm"
                   />
                   <button
                     type="button"
                     onClick={() => setShowApiKey(!showApiKey)}
-                    className="absolute right-14 top-1/2 -translate-y-1/2 p-2 text-atlas-text-muted hover:text-atlas-text-primary transition-colors"
+                    className="absolute right-14 top-1/2 -translate-y-1/2 p-2 text-atlas-text-muted hover:text-atlas-text-primary transition-colors duration-300"
                   >
                     {showApiKey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
@@ -103,25 +88,24 @@ export default function Settings() {
                     type="button"
                     onClick={handleValidate}
                     disabled={isValidating}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-atlas-bg-secondary border border-atlas-border rounded-lg text-xs font-medium text-atlas-text-secondary hover:text-atlas-gold hover:border-atlas-gold/50 transition-all duration-200 disabled:opacity-50"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-atlas-bg-secondary border border-atlas-border rounded-lg text-xs font-medium text-atlas-text-secondary hover:text-atlas-gold hover:border-atlas-gold/50 transition-all duration-300 disabled:opacity-50 active:scale-[0.98]"
                   >
                     {isValidating ? "Validating..." : "Validate"}
                   </button>
                 </div>
-                <p className="text-atlas-text-muted text-xs mt-2">
+                <p className="text-atlas-text-muted text-xs mt-2.5">
                   Your API key is stored locally and never shared.{" "}
-                  <a href="#" className="text-atlas-gold hover:underline">Learn more</a>
+                  <a href="#" className="text-atlas-gold hover:underline transition-colors">Learn more</a>
                 </p>
 
-                {/* Validation States */}
                 {validationState === 'success' && (
-                  <div className="mt-3 flex items-center gap-2 text-atlas-success text-sm">
+                  <div className="mt-4 flex items-center gap-2 text-atlas-success text-sm animate-fade-in">
                     <Check className="w-4 h-4" />
                     <span>API key validated successfully</span>
                   </div>
                 )}
                 {validationState === 'error' && (
-                  <div className="mt-3 flex items-center gap-2 text-atlas-error text-sm">
+                  <div className="mt-4 flex items-center gap-2 text-atlas-error text-sm animate-fade-in">
                     <AlertCircle className="w-4 h-4" />
                     <span>Invalid API key. Please check and try again.</span>
                   </div>
@@ -131,20 +115,19 @@ export default function Settings() {
           </section>
 
           {/* Learning Preferences */}
-          <section className="bg-atlas-bg-secondary rounded-xl border border-atlas-border overflow-hidden">
-            <div className="px-6 py-5 border-b border-atlas-border">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-atlas-gold/10 flex items-center justify-center">
+          <section className="premium-card overflow-hidden">
+            <div className="px-7 py-6 border-b border-atlas-border/50">
+              <div className="flex items-center gap-4">
+                <div className="w-11 h-11 rounded-xl bg-atlas-gold/8 flex items-center justify-center">
                   <SlidersHorizontal className="w-5 h-5 text-atlas-gold" />
                 </div>
                 <div>
                   <h2 className="font-display font-bold text-lg text-atlas-text-primary">Learning Preferences</h2>
-                  <p className="text-atlas-text-muted text-sm">Customize how AtlasED enhances your learning</p>
+                  <p className="text-atlas-text-muted text-sm mt-0.5">Customize how AtlasED enhances your learning</p>
                 </div>
               </div>
             </div>
-            <div className="p-6 space-y-4">
-              {/* Toggle Items */}
+            <div className="p-7 space-y-1">
               {[
                 { key: 'autoGenerateFieldGuides' as const, title: "Auto-generate Field Guides", desc: "Automatically create comprehensive notes from video content" },
                 { key: 'showComprehensionQuizzes' as const, title: "Show Comprehension Quizzes", desc: "Pause videos to test understanding at key moments" },
@@ -152,66 +135,66 @@ export default function Settings() {
                 { key: 'darkMode' as const, title: "Dark Mode", desc: "Use dark theme throughout the application" },
               ].map((item, index, arr) => (
                 <div key={item.key}>
-                  <div className="flex items-center justify-between py-2">
+                  <div className="flex items-center justify-between py-4">
                     <div>
                       <h3 className="font-medium text-atlas-text-primary">{item.title}</h3>
-                      <p className="text-atlas-text-muted text-sm mt-0.5">{item.desc}</p>
+                      <p className="text-atlas-text-muted text-sm mt-1">{item.desc}</p>
                     </div>
                     <button
                       type="button"
                       onClick={() => togglePreference(item.key)}
                       className={cn(
-                        "relative inline-flex h-6 w-11 items-center rounded-full transition-colors",
+                        "relative inline-flex h-7 w-12 items-center rounded-full transition-all duration-300",
                         preferences[item.key] ? "bg-atlas-gold" : "bg-atlas-bg-tertiary border border-atlas-border"
                       )}
                     >
                       <span
                         className={cn(
-                          "inline-block h-5 w-5 transform rounded-full transition-transform",
+                          "inline-block h-5 w-5 transform rounded-full transition-all duration-300",
                           preferences[item.key] 
-                            ? "translate-x-[22px] bg-atlas-text-primary" 
-                            : "translate-x-[2px] bg-atlas-text-secondary"
+                            ? "translate-x-[24px] bg-atlas-text-primary shadow-sm" 
+                            : "translate-x-[3px] bg-atlas-text-secondary"
                         )}
                       />
                     </button>
                   </div>
-                  {index < arr.length - 1 && <div className="h-px bg-atlas-border" />}
+                  {index < arr.length - 1 && <div className="h-px bg-atlas-border/40" />}
                 </div>
               ))}
             </div>
           </section>
 
           {/* Playback Speed */}
-          <section className="bg-atlas-bg-secondary rounded-xl border border-atlas-border overflow-hidden">
-            <div className="px-6 py-5 border-b border-atlas-border">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-atlas-gold/10 flex items-center justify-center">
+          <section className="premium-card overflow-hidden">
+            <div className="px-7 py-6 border-b border-atlas-border/50">
+              <div className="flex items-center gap-4">
+                <div className="w-11 h-11 rounded-xl bg-atlas-gold/8 flex items-center justify-center">
                   <Play className="w-5 h-5 text-atlas-gold" />
                 </div>
                 <div>
                   <h2 className="font-display font-bold text-lg text-atlas-text-primary">Default Playback Speed</h2>
-                  <p className="text-atlas-text-muted text-sm">Set your preferred video playback speed</p>
+                  <p className="text-atlas-text-muted text-sm mt-0.5">Set your preferred video playback speed</p>
                 </div>
               </div>
             </div>
-            <div className="p-6">
-              <div className="grid grid-cols-4 gap-3">
+            <div className="p-7">
+              <div className="grid grid-cols-4 gap-4">
                 {["0.75", "1", "1.25", "1.5"].map((speed) => (
                   <button
                     key={speed}
                     type="button"
                     onClick={() => setPlaybackSpeed(speed)}
                     className={cn(
-                      "flex flex-col items-center justify-center py-4 px-4 rounded-xl transition-all duration-200",
+                      "flex flex-col items-center justify-center py-5 px-4 rounded-xl transition-all duration-300 active:scale-[0.97]",
                       playbackSpeed === speed
-                        ? "bg-atlas-gold/10 border border-atlas-gold"
+                        ? "bg-atlas-gold/10 border border-atlas-gold shadow-lg shadow-atlas-gold/10"
                         : "bg-atlas-bg-tertiary border border-atlas-border hover:border-atlas-text-muted"
                     )}
                   >
-                    <span className="font-display font-bold text-lg text-atlas-text-primary">{speed}x</span>
+                    <span className="font-display font-bold text-xl text-atlas-text-primary tabular-nums">{speed}x</span>
                     <div className={cn(
-                      "w-2 h-2 rounded-full bg-atlas-gold mt-2 transition-opacity duration-200",
-                      playbackSpeed === speed ? "opacity-100" : "opacity-0"
+                      "w-2 h-2 rounded-full bg-atlas-gold mt-3 transition-all duration-300",
+                      playbackSpeed === speed ? "opacity-100 scale-100" : "opacity-0 scale-0"
                     )} />
                   </button>
                 ))}
@@ -220,64 +203,54 @@ export default function Settings() {
           </section>
 
           {/* Data & Privacy */}
-          <section className="bg-atlas-bg-secondary rounded-xl border border-atlas-border overflow-hidden">
-            <div className="px-6 py-5 border-b border-atlas-border">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-atlas-gold/10 flex items-center justify-center">
+          <section className="premium-card overflow-hidden">
+            <div className="px-7 py-6 border-b border-atlas-border/50">
+              <div className="flex items-center gap-4">
+                <div className="w-11 h-11 rounded-xl bg-atlas-gold/8 flex items-center justify-center">
                   <Shield className="w-5 h-5 text-atlas-gold" />
                 </div>
                 <div>
                   <h2 className="font-display font-bold text-lg text-atlas-text-primary">Data & Privacy</h2>
-                  <p className="text-atlas-text-muted text-sm">Manage your learning data and privacy settings</p>
+                  <p className="text-atlas-text-muted text-sm mt-0.5">Manage your learning data and privacy settings</p>
                 </div>
               </div>
             </div>
-            <div className="p-6 space-y-4">
-              <button
-                type="button"
-                className="w-full flex items-center justify-between p-4 bg-atlas-bg-tertiary border border-atlas-border rounded-xl hover:border-atlas-gold/50 hover:bg-atlas-bg-tertiary/80 transition-all duration-200 group"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-atlas-bg-secondary flex items-center justify-center group-hover:bg-atlas-gold/10 transition-colors">
-                    <Download className="w-5 h-5 text-atlas-text-secondary group-hover:text-atlas-gold transition-colors" />
+            <div className="p-7 space-y-4">
+              {[
+                { icon: Download, title: "Export Learning Data", desc: "Download all your expeditions, notes, and progress" },
+                { icon: Trash2, title: "Clear Cache", desc: "Remove temporary files and cached video data" },
+              ].map((item) => (
+                <button
+                  key={item.title}
+                  type="button"
+                  className="w-full flex items-center justify-between p-5 bg-atlas-bg-tertiary/50 border border-atlas-border rounded-xl hover:border-atlas-gold/30 transition-all duration-300 group active:scale-[0.99]"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-11 h-11 rounded-xl bg-atlas-bg-secondary flex items-center justify-center group-hover:bg-atlas-gold/8 transition-colors duration-300">
+                      <item.icon className="w-5 h-5 text-atlas-text-secondary group-hover:text-atlas-gold transition-colors duration-300" />
+                    </div>
+                    <div className="text-left">
+                      <h3 className="font-medium text-atlas-text-primary">{item.title}</h3>
+                      <p className="text-atlas-text-muted text-sm mt-0.5">{item.desc}</p>
+                    </div>
                   </div>
-                  <div className="text-left">
-                    <h3 className="font-medium text-atlas-text-primary">Export Learning Data</h3>
-                    <p className="text-atlas-text-muted text-sm">Download all your expeditions, notes, and progress</p>
-                  </div>
-                </div>
-                <ChevronRight className="w-5 h-5 text-atlas-text-muted" />
-              </button>
+                  <ChevronRight className="w-5 h-5 text-atlas-text-muted group-hover:text-atlas-gold group-hover:translate-x-1 transition-all duration-300" />
+                </button>
+              ))}
 
-              <button
-                type="button"
-                className="w-full flex items-center justify-between p-4 bg-atlas-bg-tertiary border border-atlas-border rounded-xl hover:border-atlas-gold/50 hover:bg-atlas-bg-tertiary/80 transition-all duration-200 group"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-atlas-bg-secondary flex items-center justify-center group-hover:bg-atlas-gold/10 transition-colors">
-                    <Trash2 className="w-5 h-5 text-atlas-text-secondary group-hover:text-atlas-gold transition-colors" />
-                  </div>
-                  <div className="text-left">
-                    <h3 className="font-medium text-atlas-text-primary">Clear Cache</h3>
-                    <p className="text-atlas-text-muted text-sm">Remove temporary files and cached video data</p>
-                  </div>
-                </div>
-                <ChevronRight className="w-5 h-5 text-atlas-text-muted" />
-              </button>
-
-              <a href="#" className="flex items-center justify-center gap-2 py-3 text-atlas-text-secondary hover:text-atlas-gold transition-colors text-sm">
+              <a href="#" className="flex items-center justify-center gap-2 py-4 text-atlas-text-secondary hover:text-atlas-gold transition-colors duration-300 text-sm">
                 <FileText className="w-4 h-4" />
                 <span>View Privacy Policy</span>
               </a>
             </div>
           </section>
 
-          {/* Action Buttons */}
-          <div className="flex items-center justify-end gap-4 pt-4">
+          {/* Action Buttons — Primary CTA pops, secondary is ghost */}
+          <div className="flex items-center justify-end gap-4 pt-6">
             <button
               type="button"
               onClick={() => navigate(-1)}
-              className="px-6 py-2.5 rounded-lg border border-atlas-border text-atlas-text-secondary font-medium hover:text-atlas-text-primary hover:border-atlas-text-muted transition-all duration-200"
+              className="btn-ghost px-7 py-3 rounded-xl border border-atlas-border text-atlas-text-secondary font-medium hover:text-atlas-text-primary hover:border-atlas-text-muted active:scale-[0.98]"
             >
               Cancel
             </button>
@@ -285,7 +258,7 @@ export default function Settings() {
               type="submit"
               onClick={handleSave}
               disabled={isSaving}
-              className="px-6 py-2.5 rounded-lg bg-atlas-gold text-atlas-bg-primary font-display font-bold hover:bg-atlas-gold-hover transition-all duration-200 flex items-center gap-2 disabled:opacity-50"
+              className="btn-premium px-7 py-3 rounded-xl bg-atlas-gold text-atlas-bg-primary font-display font-bold hover:bg-atlas-gold-hover flex items-center gap-2 disabled:opacity-50"
             >
               <Check className="w-4 h-4" />
               {isSaving ? "Saving..." : "Save Changes"}
@@ -294,13 +267,13 @@ export default function Settings() {
         </form>
 
         {/* Footer */}
-        <footer className="mt-12 pt-8 border-t border-atlas-border">
+        <footer className="mt-16 pt-8 border-t border-atlas-border/40">
           <div className="flex items-center justify-between text-atlas-text-muted text-sm">
-            <p>AtlasED v1.0.0</p>
-            <div className="flex items-center gap-4">
-              <a href="#" className="hover:text-atlas-gold transition-colors">Documentation</a>
-              <a href="#" className="hover:text-atlas-gold transition-colors">Support</a>
-              <a href="#" className="hover:text-atlas-gold transition-colors">GitHub</a>
+            <p className="font-mono">AtlasED v1.0.0</p>
+            <div className="flex items-center gap-6">
+              <a href="#" className="hover:text-atlas-gold transition-colors duration-300">Documentation</a>
+              <a href="#" className="hover:text-atlas-gold transition-colors duration-300">Support</a>
+              <a href="#" className="hover:text-atlas-gold transition-colors duration-300">GitHub</a>
             </div>
           </div>
         </footer>

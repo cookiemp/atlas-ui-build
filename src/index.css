@@ -6,53 +6,56 @@
 
 @layer base {
   :root {
-    /* AtlasED Dark Theme Design System */
-    --background: 0 0% 6%;
-    --foreground: 0 0% 100%;
+    /* AtlasED Dark Theme — Premium Psychology System */
+    /* LAW: Never use pure black. Tint with 2% brand warmth. */
+    --background: 220 8% 7%;
+    --foreground: 40 10% 96%;
 
-    --card: 0 0% 10%;
-    --card-foreground: 0 0% 100%;
+    --card: 220 6% 11%;
+    --card-foreground: 40 10% 96%;
 
-    --popover: 0 0% 10%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 220 6% 13%;
+    --popover-foreground: 40 10% 96%;
 
     --primary: 41 56% 58%;
-    --primary-foreground: 0 0% 6%;
+    --primary-foreground: 220 8% 7%;
 
-    --secondary: 0 0% 14%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 220 6% 15%;
+    --secondary-foreground: 40 10% 96%;
 
-    --muted: 0 0% 14%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 220 6% 15%;
+    --muted-foreground: 220 4% 46%;
 
-    --accent: 0 0% 14%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 220 6% 15%;
+    --accent-foreground: 40 10% 96%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive-foreground: 40 10% 96%;
 
-    --border: 0 0% 16%;
-    --input: 0 0% 16%;
+    --border: 220 6% 17%;
+    --input: 220 6% 17%;
     --ring: 41 56% 58%;
 
     --radius: 0.75rem;
 
-    /* Atlas-specific semantic colors */
-    --atlas-bg-primary: 0 0% 6%;
-    --atlas-bg-secondary: 0 0% 10%;
-    --atlas-bg-tertiary: 0 0% 14%;
+    /* Atlas-specific semantic colors — Dark Mode Elevation Rule:
+       Surfaces get LIGHTER as they elevate (closer to user) */
+    --atlas-bg-primary: 220 8% 7%;
+    --atlas-bg-secondary: 220 6% 11%;
+    --atlas-bg-tertiary: 220 6% 15%;
     
     --atlas-gold: 41 56% 58%;
     --atlas-gold-hover: 41 60% 66%;
     --atlas-gold-muted: 40 43% 44%;
     --atlas-gold-light: 45 77% 76%;
     
-    --atlas-text-primary: 0 0% 100%;
-    --atlas-text-secondary: 0 0% 64%;
-    --atlas-text-muted: 0 0% 45%;
+    --atlas-text-primary: 40 10% 96%;
+    --atlas-text-secondary: 220 4% 66%;
+    --atlas-text-muted: 220 4% 46%;
     
-    --atlas-border: 0 0% 16%;
+    --atlas-border: 220 6% 17%;
     
+    /* Semantic colors — separated from brand */
     --atlas-success: 142 71% 65%;
     --atlas-warning: 45 93% 55%;
     --atlas-error: 0 84% 60%;
@@ -64,13 +67,13 @@
     --category-practical: 142 71% 65%;
     --category-theory: 330 81% 71%;
 
-    --sidebar-background: 0 0% 10%;
-    --sidebar-foreground: 0 0% 64%;
+    --sidebar-background: 220 6% 11%;
+    --sidebar-foreground: 220 4% 66%;
     --sidebar-primary: 41 56% 58%;
-    --sidebar-primary-foreground: 0 0% 6%;
-    --sidebar-accent: 0 0% 14%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 0 0% 16%;
+    --sidebar-primary-foreground: 220 8% 7%;
+    --sidebar-accent: 220 6% 15%;
+    --sidebar-accent-foreground: 40 10% 96%;
+    --sidebar-border: 220 6% 17%;
     --sidebar-ring: 41 56% 58%;
   }
 }
@@ -84,8 +87,14 @@
     @apply bg-background text-foreground font-body antialiased;
   }
 
+  /* Typography Authority: tight headers, readable body */
   h1, h2, h3, h4, h5, h6 {
     @apply font-display;
+    letter-spacing: -0.02em;
+  }
+
+  p, span, li {
+    line-height: 1.6;
   }
 }
 
@@ -103,40 +112,52 @@
   }
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar — Subtle, premium feel */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(var(--atlas-bg-secondary));
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
   background: hsl(var(--atlas-border));
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--atlas-gold));
+  background: hsl(var(--atlas-gold-muted));
 }
 
-/* Animations */
+/* ===== PREMIUM ANIMATIONS ===== */
+/* LAW 3: Peak-End Rule — Physics, not math. ease-out for entering, ease-in for exiting. */
+
 @keyframes shimmer {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(10px); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes modalEnter {
   from {
     opacity: 0;
-    transform: scale(0.95) translateY(10px);
+    transform: scale(0.96) translateY(12px);
   }
   to {
     opacity: 1;
@@ -153,8 +174,18 @@
   to { transform: translateX(0); opacity: 1; }
 }
 
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
 @keyframes progressFill {
   from { width: 0%; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 hsla(var(--atlas-gold) / 0.3); }
+  50% { box-shadow: 0 0 20px 4px hsla(var(--atlas-gold) / 0.15); }
 }
 
 .skeleton {
@@ -164,11 +195,11 @@
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.3s ease-out;
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .animate-modal-enter {
-  animation: modalEnter 0.3s ease-out;
+  animation: modalEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .animate-spin-slow {
@@ -176,23 +207,81 @@
 }
 
 .animate-slide-in {
-  animation: slideIn 0.3s ease-out;
+  animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .animate-progress-fill {
-  animation: progressFill 0.8s ease-out forwards;
+  animation: progressFill 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Glass Panel Effect */
+.animate-pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* ===== PREMIUM INTERACTIVE STATES ===== */
+/* LAW 3: Every action needs a reaction. */
+
+/* Universal interactive element base */
+.premium-interactive {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.premium-interactive:hover {
+  transform: translateY(-2px);
+}
+
+.premium-interactive:active {
+  transform: scale(0.98) translateY(0);
+}
+
+/* Premium button glow on hover */
+.btn-premium {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.btn-premium:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 30px -8px hsla(var(--atlas-gold) / 0.35);
+}
+
+.btn-premium:active {
+  transform: scale(0.98) translateY(0);
+  box-shadow: none;
+}
+
+/* Ghost button */
+.btn-ghost {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-ghost:hover {
+  background: hsla(var(--atlas-bg-tertiary) / 0.8);
+}
+
+.btn-ghost:active {
+  transform: scale(0.98);
+}
+
+/* Glass Panel Effect — Premium depth */
 .glass-panel {
-  background: hsla(var(--atlas-bg-secondary) / 0.95);
-  backdrop-filter: blur(12px);
-  border: 1px solid hsla(var(--atlas-gold) / 0.15);
+  background: hsla(var(--atlas-bg-secondary) / 0.92);
+  backdrop-filter: blur(16px);
+  border: 1px solid hsla(var(--atlas-gold) / 0.1);
 }
 
-/* Input Focus Glow */
+/* Input Focus Glow — Satisfying feedback */
+.input-glow {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 .input-glow:focus {
-  box-shadow: 0 0 0 2px hsla(var(--atlas-gold) / 0.2);
+  box-shadow: 0 0 0 3px hsla(var(--atlas-gold) / 0.15);
+  border-color: hsl(var(--atlas-gold)) !important;
 }
 
 /* Progress Bar Gradient */
@@ -202,16 +291,32 @@
 
 /* Gold Glow Effect */
 .glow-gold {
-  box-shadow: 0 0 40px hsla(var(--atlas-gold) / 0.15);
+  box-shadow: 0 0 50px hsla(var(--atlas-gold) / 0.12);
 }
 
 /* Map Pattern for Empty States */
 .map-pattern {
-  background-image: radial-gradient(circle at 2px 2px, hsla(var(--atlas-gold) / 0.15) 1px, transparent 0);
+  background-image: radial-gradient(circle at 2px 2px, hsla(var(--atlas-gold) / 0.12) 1px, transparent 0);
   background-size: 40px 40px;
 }
 
-/* Difficulty Badge Glow Effects */
+/* ===== PREMIUM CARD SYSTEM ===== */
+/* Dark Mode: subtle border, no shadow. Hover: border glow + lift */
+
+.premium-card {
+  background: hsl(var(--atlas-bg-secondary));
+  border: 1px solid hsl(var(--atlas-border));
+  border-radius: 1rem;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.premium-card:hover {
+  border-color: hsla(var(--atlas-gold) / 0.35);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px -12px hsla(var(--atlas-gold) / 0.08);
+}
+
+/* ===== DIFFICULTY BADGES ===== */
 .difficulty-easy {
   box-shadow: 0 0 12px hsla(var(--atlas-success) / 0.15);
 }
@@ -224,66 +329,68 @@
   box-shadow: 0 0 12px hsla(var(--atlas-error) / 0.15);
 }
 
-/* Quiz Option Styles */
+/* ===== QUIZ OPTION STATES ===== */
 .quiz-option {
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .quiz-option:hover:not(.selected):not(.disabled) {
-  background: hsl(0 0% 12%);
-  border-color: hsl(0 0% 23%);
+  background: hsl(220 6% 13%);
+  border-color: hsl(220 6% 22%);
+  transform: translateX(4px);
 }
 
 .quiz-option.selected {
-  background: hsla(var(--atlas-gold) / 0.1);
+  background: hsla(var(--atlas-gold) / 0.08);
   border-color: hsl(var(--atlas-gold));
 }
 
 .quiz-option.correct {
-  background: hsla(var(--atlas-success) / 0.1);
+  background: hsla(var(--atlas-success) / 0.08);
   border-color: hsl(var(--atlas-success));
 }
 
 .quiz-option.incorrect {
-  background: hsla(var(--atlas-error) / 0.1);
+  background: hsla(var(--atlas-error) / 0.08);
   border-color: hsl(var(--atlas-error));
 }
 
-/* Waypoint Row Hover */
+/* ===== WAYPOINT ROW ===== */
 .waypoint-row {
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .waypoint-row:hover {
-  background-color: hsl(var(--atlas-bg-tertiary));
+  background-color: hsla(var(--atlas-bg-tertiary) / 0.6);
   transform: translateX(4px);
 }
 
-/* Checkpoint Card Hover */
+/* ===== CHECKPOINT CARD ===== */
 .checkpoint-card {
-  transition: all 0.2s ease-out;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .checkpoint-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px -12px hsla(var(--atlas-gold) / 0.08);
 }
 
-/* Tab Content Transition */
+/* ===== TAB CONTENT ===== */
 .tab-content {
-  transition: opacity 0.2s ease;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Code Block Styling */
+/* ===== CODE BLOCK ===== */
 .code-block {
-  background: hsl(0 0% 4%);
+  background: hsl(220 10% 5%);
   border: 1px solid hsl(var(--atlas-border));
   font-family: 'JetBrains Mono', monospace;
 }
 
-/* Chat Bubbles */
+/* ===== CHAT BUBBLES ===== */
 .chat-bubble-user {
-  background: hsla(var(--atlas-gold) / 0.12);
-  border: 1px solid hsla(var(--atlas-gold) / 0.25);
+  background: hsla(var(--atlas-gold) / 0.1);
+  border: 1px solid hsla(var(--atlas-gold) / 0.2);
 }
 
 .chat-bubble-ai {
@@ -291,19 +398,19 @@
   border: 1px solid hsl(var(--atlas-border));
 }
 
-/* Knowledge Graph Styles */
+/* ===== KNOWLEDGE GRAPH ===== */
 .node-circle {
-  transition: all 0.3s ease;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
 }
 
 .node-circle:hover {
-  filter: drop-shadow(0 0 8px currentColor);
+  filter: drop-shadow(0 0 12px currentColor);
 }
 
 .graph-link {
-  stroke-opacity: 0.4;
-  transition: all 0.3s ease;
+  stroke-opacity: 0.35;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .graph-link.highlighted {
@@ -312,7 +419,7 @@
 }
 
 .graph-link.dimmed {
-  stroke-opacity: 0.1;
+  stroke-opacity: 0.08;
 }
 
 .node-label {
@@ -320,7 +427,7 @@
   font-size: 12px;
   fill: hsl(var(--atlas-text-secondary));
   pointer-events: none;
-  text-shadow: 0 1px 3px hsla(0 0% 0% / 0.8);
+  text-shadow: 0 2px 6px hsla(0 0% 0% / 0.9);
 }
 
 .node-label.highlighted {
@@ -329,7 +436,7 @@
 }
 
 .node-label.dimmed {
-  opacity: 0.3;
+  opacity: 0.2;
 }
 
 /* Graph Container Background */
@@ -343,5 +450,13 @@
 /* Pause Overlay */
 .pause-overlay {
   background: hsla(var(--atlas-bg-primary) / 0.85);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(6px);
 }
+
+/* ===== STAGGERED ENTRANCE ANIMATIONS ===== */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s; }

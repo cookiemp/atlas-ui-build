@@ -15,9 +15,7 @@ export default function Dashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleCreateExpedition = (playlistUrl: string, name?: string) => {
-    // In real app, this would create the expedition
     console.log("Creating expedition:", { playlistUrl, name });
-    // Add a new mock expedition
     const newExpedition = {
       id: String(expeditions.length + 1),
       title: name || "New Expedition",
@@ -41,23 +39,23 @@ export default function Dashboard() {
       {isEmpty ? (
         <EmptyState onCreateExpedition={() => setIsModalOpen(true)} />
       ) : (
-        <div className="flex-1 flex flex-col">
-          {/* Header Section */}
-          <div className="px-8 py-8 md:px-12 lg:px-16">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="flex-1 flex flex-col animate-fade-in">
+          {/* Header Section — Radical whitespace (1.5x padding) */}
+          <div className="px-10 py-10 md:px-14 lg:px-20">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
               <div>
-                <h1 className="font-display font-bold text-3xl md:text-4xl text-atlas-text-primary tracking-tight">
+                <h1 className="font-display font-bold text-3xl md:text-4xl text-atlas-text-primary">
                   Your Expeditions
                 </h1>
-                <p className="text-atlas-text-secondary mt-1.5 text-base">
+                <p className="text-atlas-text-secondary mt-2 text-base">
                   Transform YouTube playlists into structured learning journeys
                 </p>
               </div>
 
-              {/* CTA Button */}
+              {/* Primary CTA — Must "pop" with glow */}
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="group flex items-center gap-3 bg-atlas-gold hover:bg-atlas-gold-hover text-atlas-bg-primary font-semibold px-6 py-3 rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-atlas-gold/20 hover:-translate-y-0.5"
+                className="btn-premium group flex items-center gap-3 bg-atlas-gold hover:bg-atlas-gold-hover text-atlas-bg-primary font-semibold px-7 py-3.5 rounded-xl"
               >
                 <Plus className="w-5 h-5" />
                 <span>Start New Expedition</span>
@@ -65,22 +63,23 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Content Container */}
-          <div className="flex-1 px-8 md:px-12 lg:px-16 pb-8">
+          {/* Content Container — Generous spacing */}
+          <div className="flex-1 px-10 md:px-14 lg:px-20 pb-10">
             {/* Expedition Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {expeditions.map((expedition) => (
-                <ExpeditionCard
-                  key={expedition.id}
-                  expedition={expedition}
-                  onClick={() => navigate(`/expedition/${expedition.id}`)}
-                  onDelete={() => handleDeleteExpedition(expedition.id)}
-                />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7">
+              {expeditions.map((expedition, i) => (
+                <div key={expedition.id} className="animate-fade-in" style={{ animationDelay: `${i * 60}ms` }}>
+                  <ExpeditionCard
+                    expedition={expedition}
+                    onClick={() => navigate(`/expedition/${expedition.id}`)}
+                    onDelete={() => handleDeleteExpedition(expedition.id)}
+                  />
+                </div>
               ))}
             </div>
 
-            {/* Info Section */}
-            <div className="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Info Section — Whitespace separation, no borders between sections */}
+            <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-7">
               <RecentActivity activities={mockActivities} />
               <LearningTips />
             </div>
