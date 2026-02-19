@@ -40,14 +40,14 @@ export default function ExpeditionView() {
     switch (status) {
       case 'completed':
         return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-atlas-success/10 text-atlas-success text-xs font-medium rounded-full">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-atlas-success/8 text-atlas-success text-xs font-medium rounded-full">
             <CheckCircle className="w-3.5 h-3.5" />
             Completed
           </span>
         );
       case 'in-progress':
         return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-atlas-info/10 text-atlas-info text-xs font-medium rounded-full">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-atlas-info/8 text-atlas-info text-xs font-medium rounded-full">
             <Loader2 className="w-3.5 h-3.5 animate-spin" />
             In Progress
           </span>
@@ -70,62 +70,50 @@ export default function ExpeditionView() {
         backTo: "/" 
       }}
     >
-      <div className="max-w-7xl mx-auto px-8 py-8 w-full">
-        {/* Expedition Header */}
-        <div className="mb-8">
-          <div className="flex items-start justify-between mb-6">
+      <div className="max-w-7xl mx-auto px-10 py-10 w-full animate-fade-in">
+        {/* Expedition Header — Generous whitespace */}
+        <div className="mb-10">
+          <div className="flex items-start justify-between mb-8">
             <div>
-              <div className="flex items-center gap-3 mb-2">
+              <div className="flex items-center gap-3 mb-3">
                 <span className="text-atlas-gold text-sm font-medium tracking-wide uppercase">Expedition</span>
-                <span className="text-atlas-text-muted">•</span>
+                <span className="text-atlas-text-muted/40">·</span>
                 <span className="text-atlas-text-secondary text-sm">Frontend Development</span>
               </div>
-              <h1 className="font-display font-bold text-4xl text-atlas-text-primary tracking-tight mb-3">
+              <h1 className="font-display font-bold text-4xl text-atlas-text-primary mb-4">
                 React Fundamentals
               </h1>
-              <p className="text-atlas-text-secondary text-base max-w-2xl leading-relaxed">
+              <p className="text-atlas-text-secondary text-base max-w-2xl">
                 Master the core concepts of React including components, props, state, hooks, and modern patterns. Build a solid foundation for modern web development.
               </p>
             </div>
-            <button className="flex items-center gap-2 px-4 py-2.5 bg-atlas-bg-tertiary hover:bg-atlas-border border border-atlas-border rounded-lg text-atlas-text-secondary hover:text-atlas-text-primary transition-all duration-200">
+            <button className="flex items-center gap-2 px-4 py-2.5 bg-atlas-bg-tertiary hover:bg-atlas-border border border-atlas-border rounded-xl text-atlas-text-secondary hover:text-atlas-text-primary transition-all duration-300 active:scale-[0.98]">
               <MoreVertical className="w-[18px] h-[18px]" />
             </button>
           </div>
 
-          {/* Meta Info & Progress */}
-          <div className="bg-atlas-bg-secondary border border-atlas-border rounded-xl p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-8">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-atlas-bg-tertiary flex items-center justify-center">
-                    <MapPin className="w-5 h-5 text-atlas-gold" />
+          {/* Meta Info & Progress — Premium card */}
+          <div className="premium-card p-7">
+            <div className="flex items-center justify-between mb-5">
+              <div className="flex items-center gap-10">
+                {[
+                  { icon: MapPin, color: "text-atlas-gold", label: "Waypoints", value: waypoints.length },
+                  { icon: Clock, color: "text-atlas-info", label: "Est. Time", value: "8h 45m" },
+                  { icon: Calendar, color: "text-atlas-success", label: "Started", value: "Jan 15" },
+                ].map((stat) => (
+                  <div key={stat.label} className="flex items-center gap-3">
+                    <div className="w-11 h-11 rounded-xl bg-atlas-bg-tertiary flex items-center justify-center">
+                      <stat.icon className={cn("w-5 h-5", stat.color)} />
+                    </div>
+                    <div>
+                      <p className="text-atlas-text-muted text-xs uppercase tracking-wider font-medium">{stat.label}</p>
+                      <p className="text-atlas-text-primary font-display font-bold text-lg">{stat.value}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-atlas-text-muted text-xs uppercase tracking-wider font-medium">Waypoints</p>
-                    <p className="text-atlas-text-primary font-display font-bold text-lg">{waypoints.length}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-atlas-bg-tertiary flex items-center justify-center">
-                    <Clock className="w-5 h-5 text-atlas-info" />
-                  </div>
-                  <div>
-                    <p className="text-atlas-text-muted text-xs uppercase tracking-wider font-medium">Est. Time</p>
-                    <p className="text-atlas-text-primary font-display font-bold text-lg">8h 45m</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-atlas-bg-tertiary flex items-center justify-center">
-                    <Calendar className="w-5 h-5 text-atlas-success" />
-                  </div>
-                  <div>
-                    <p className="text-atlas-text-muted text-xs uppercase tracking-wider font-medium">Started</p>
-                    <p className="text-atlas-text-primary font-display font-bold text-lg">Jan 15</p>
-                  </div>
-                </div>
+                ))}
               </div>
               <div className="text-right">
-                <p className="text-atlas-gold font-display font-bold text-3xl">{progress}%</p>
+                <p className="text-atlas-gold font-display font-bold text-3xl tabular-nums">{progress}%</p>
                 <p className="text-atlas-text-muted text-sm">Complete</p>
               </div>
             </div>
@@ -133,11 +121,11 @@ export default function ExpeditionView() {
             <div className="relative">
               <div className="h-2 bg-atlas-bg-tertiary rounded-full overflow-hidden">
                 <div 
-                  className="h-full bg-gradient-to-r from-atlas-gold to-atlas-gold-hover rounded-full transition-all duration-500"
+                  className="h-full bg-gradient-to-r from-atlas-gold to-atlas-gold-hover rounded-full animate-progress-fill"
                   style={{ width: `${progress}%` }}
                 />
               </div>
-              <div className="flex justify-between mt-2 text-xs text-atlas-text-muted">
+              <div className="flex justify-between mt-3 text-xs text-atlas-text-muted">
                 <span>{completedCount} of {waypoints.length} waypoints charted</span>
                 <span>Last active: 2 hours ago</span>
               </div>
@@ -145,17 +133,17 @@ export default function ExpeditionView() {
           </div>
         </div>
 
-        {/* Filters & Sort */}
-        <div className="flex items-center justify-between mb-6">
+        {/* Filters & Sort — Clean, minimal */}
+        <div className="flex items-center justify-between mb-7">
           <div className="flex items-center gap-3">
             {(['all', 'in-progress', 'completed', 'not-started'] as FilterType[]).map((f) => (
               <button
                 key={f}
                 onClick={() => setFilter(f)}
                 className={cn(
-                  "px-4 py-2 font-medium text-sm rounded-lg transition-all",
+                  "px-4 py-2.5 font-medium text-sm rounded-xl transition-all duration-300 active:scale-[0.98]",
                   filter === f
-                    ? "bg-atlas-gold text-atlas-bg-primary"
+                    ? "bg-atlas-gold text-atlas-bg-primary shadow-lg shadow-atlas-gold/15"
                     : "bg-atlas-bg-secondary border border-atlas-border text-atlas-text-secondary hover:bg-atlas-bg-tertiary hover:text-atlas-text-primary"
                 )}
               >
@@ -168,7 +156,7 @@ export default function ExpeditionView() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="bg-atlas-bg-secondary border border-atlas-border text-atlas-text-primary text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-atlas-gold transition-colors cursor-pointer"
+              className="bg-atlas-bg-secondary border border-atlas-border text-atlas-text-primary text-sm rounded-xl px-4 py-2.5 focus:outline-none focus:border-atlas-gold transition-all duration-300 cursor-pointer"
             >
               <option value="order">Default Order</option>
               <option value="date">Last Completed</option>
@@ -178,10 +166,10 @@ export default function ExpeditionView() {
           </div>
         </div>
 
-        {/* Waypoints List */}
-        <div className="bg-atlas-bg-secondary border border-atlas-border rounded-xl overflow-hidden">
+        {/* Waypoints List — Premium card container */}
+        <div className="premium-card overflow-hidden">
           {/* Table Header */}
-          <div className="grid grid-cols-12 gap-4 px-6 py-4 bg-atlas-bg-tertiary border-b border-atlas-border text-atlas-text-muted text-xs uppercase tracking-wider font-medium">
+          <div className="grid grid-cols-12 gap-4 px-7 py-4 bg-atlas-bg-tertiary/50 text-atlas-text-muted text-xs uppercase tracking-wider font-medium">
             <div className="col-span-5">Waypoint</div>
             <div className="col-span-1 text-center">Duration</div>
             <div className="col-span-2 text-center">Status</div>
@@ -191,41 +179,41 @@ export default function ExpeditionView() {
           </div>
 
           {/* Waypoint Rows */}
-          <div className="divide-y divide-atlas-border">
+          <div className="divide-y divide-atlas-border/50">
             {filteredWaypoints.map((waypoint) => (
               <div
                 key={waypoint.id}
                 onClick={() => navigate(`/player/${waypoint.id}`)}
                 className={cn(
-                  "waypoint-row grid grid-cols-12 gap-4 px-6 py-4 items-center cursor-pointer group",
-                  waypoint.status === 'in-progress' && "bg-atlas-bg-tertiary/30 border-l-2 border-atlas-gold",
-                  waypoint.status === 'not-started' && "opacity-75"
+                  "waypoint-row grid grid-cols-12 gap-4 px-7 py-5 items-center cursor-pointer group",
+                  waypoint.status === 'in-progress' && "bg-atlas-bg-tertiary/20 border-l-2 border-atlas-gold",
+                  waypoint.status === 'not-started' && "opacity-70"
                 )}
               >
                 <div className="col-span-5 flex items-center gap-4">
                   <div className={cn(
-                    "w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0",
-                    waypoint.status === 'completed' && "bg-atlas-success/10",
-                    waypoint.status === 'in-progress' && "bg-atlas-info/10",
+                    "w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300",
+                    waypoint.status === 'completed' && "bg-atlas-success/8",
+                    waypoint.status === 'in-progress' && "bg-atlas-info/8",
                     waypoint.status === 'not-started' && "bg-atlas-bg-tertiary border border-atlas-border"
                   )}>
                     {getStatusIcon(waypoint.status)}
                   </div>
                   <div className="min-w-0">
-                    <p className="text-atlas-text-primary font-medium truncate group-hover:text-atlas-gold transition-colors">
+                    <p className="text-atlas-text-primary font-medium truncate group-hover:text-atlas-gold transition-colors duration-300">
                       {waypoint.title}
                     </p>
                     <p className="text-atlas-text-muted text-sm truncate">{waypoint.description}</p>
                   </div>
                   {waypoint.status === 'in-progress' && (
-                    <span className="px-2 py-0.5 bg-atlas-gold text-atlas-bg-primary text-xs font-bold rounded">CURRENT</span>
+                    <span className="px-2.5 py-0.5 bg-atlas-gold text-atlas-bg-primary text-xs font-bold rounded-md">CURRENT</span>
                   )}
                 </div>
-                <div className="col-span-1 text-center text-atlas-text-secondary text-sm">{waypoint.duration}</div>
+                <div className="col-span-1 text-center text-atlas-text-secondary text-sm tabular-nums">{waypoint.duration}</div>
                 <div className="col-span-2 flex justify-center">{getStatusBadge(waypoint.status)}</div>
                 <div className="col-span-2 flex justify-center">
                   {waypoint.hasFieldGuide ? (
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-atlas-gold/10 text-atlas-gold text-xs font-medium rounded-full">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-atlas-gold/8 text-atlas-gold text-xs font-medium rounded-full">
                       <FileText className="w-3.5 h-3.5" />
                       Charted
                     </span>
@@ -243,7 +231,7 @@ export default function ExpeditionView() {
                     <Lock className="w-5 h-5 text-atlas-text-muted" />
                   )}
                 </div>
-                <div className="col-span-1 text-right text-atlas-text-secondary text-sm">
+                <div className="col-span-1 text-right text-atlas-text-secondary text-sm tabular-nums">
                   {waypoint.lastViewed || "—"}
                 </div>
               </div>
@@ -252,9 +240,9 @@ export default function ExpeditionView() {
         </div>
 
         {/* Bottom Info */}
-        <div className="mt-6 flex items-center justify-between text-atlas-text-muted text-sm">
+        <div className="mt-7 flex items-center justify-between text-atlas-text-muted text-sm">
           <p>Showing {filteredWaypoints.length} of {waypoints.length} waypoints</p>
-          <button className="flex items-center gap-2 hover:text-atlas-text-primary transition-colors">
+          <button className="flex items-center gap-2 hover:text-atlas-text-primary transition-colors duration-300 active:scale-[0.98]">
             <ChevronDown className="w-[18px] h-[18px]" />
             Load remaining waypoints
           </button>

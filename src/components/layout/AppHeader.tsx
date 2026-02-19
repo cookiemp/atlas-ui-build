@@ -25,42 +25,42 @@ export function AppHeader({ showBack = true, backLabel = "Back", backTo, title, 
   };
 
   return (
-    <header className="h-14 bg-atlas-bg-secondary border-b border-atlas-border flex items-center justify-between px-6 select-none">
+    <header className="h-16 bg-atlas-bg-secondary/80 backdrop-blur-md border-b border-atlas-border flex items-center justify-between px-8 select-none sticky top-0 z-50">
       {/* Left: Logo and Navigation */}
       <div className="flex items-center gap-6">
         {/* Logo */}
         <div 
-          className="flex items-center gap-2.5 cursor-pointer" 
+          className="flex items-center gap-3 cursor-pointer group" 
           onClick={() => navigate("/")}
         >
-          <div className="w-8 h-8 rounded-lg bg-atlas-gold flex items-center justify-center">
+          <div className="w-9 h-9 rounded-xl bg-atlas-gold flex items-center justify-center transition-all duration-300 group-hover:shadow-lg group-hover:shadow-atlas-gold/20">
             <Compass className="w-[18px] h-[18px] text-atlas-bg-primary" />
           </div>
-          <span className="font-display font-bold text-lg tracking-tight text-atlas-text-primary">
+          <span className="font-display font-bold text-lg text-atlas-text-primary">
             AtlasED
           </span>
         </div>
         
-        {/* Divider */}
-        <div className="w-px h-6 bg-atlas-border" />
+        {/* Divider — whitespace grouping */}
+        <div className="w-px h-6 bg-atlas-border/60" />
         
         {/* Back Button or Title */}
         {title ? (
           <div className="flex items-center gap-2">
             <span className="text-sm text-atlas-text-muted">{subtitle}</span>
-            {subtitle && <span className="text-atlas-text-muted">•</span>}
+            {subtitle && <span className="text-atlas-text-muted/40">·</span>}
             <span className="text-sm font-medium text-atlas-text-secondary">{title}</span>
           </div>
         ) : showBack && !isHome ? (
           <button
             onClick={handleBack}
             className={cn(
-              "flex items-center gap-2 text-atlas-text-secondary hover:text-atlas-text-primary transition-colors duration-200 group",
+              "flex items-center gap-2 text-atlas-text-secondary hover:text-atlas-text-primary transition-all duration-300 group/back",
               isHome && "opacity-30 cursor-not-allowed pointer-events-none"
             )}
             disabled={isHome}
           >
-            <ArrowLeft className="w-[18px] h-[18px] group-hover:-translate-x-0.5 transition-transform duration-200" />
+            <ArrowLeft className="w-[18px] h-[18px] group-hover/back:-translate-x-1 transition-transform duration-300" />
             <span className="text-sm font-medium">{backLabel}</span>
           </button>
         ) : null}
@@ -71,12 +71,14 @@ export function AppHeader({ showBack = true, backLabel = "Back", backTo, title, 
         <button
           onClick={() => navigate("/settings")}
           className={cn(
-            "flex items-center gap-2 text-atlas-text-secondary hover:text-atlas-text-primary transition-colors duration-200 group px-3 py-1.5 rounded-lg hover:bg-atlas-bg-tertiary",
-            isSettingsPage && "bg-atlas-gold/10 text-atlas-gold"
+            "flex items-center gap-2.5 text-atlas-text-secondary hover:text-atlas-text-primary transition-all duration-300 group px-4 py-2 rounded-xl",
+            isSettingsPage 
+              ? "bg-atlas-gold/10 text-atlas-gold" 
+              : "hover:bg-atlas-bg-tertiary/60"
           )}
         >
           <Settings className={cn(
-            "w-[18px] h-[18px] transition-transform duration-300",
+            "w-[18px] h-[18px] transition-transform duration-500",
             !isSettingsPage && "group-hover:rotate-90"
           )} />
           <span className="text-sm font-medium">Settings</span>
