@@ -35,16 +35,16 @@ export function RecentActivity({ activities }: RecentActivityProps) {
           const isLast = index === activities.length - 1;
 
           return (
-            <div key={activity.id} className="flex items-start gap-4 group">
+            <div key={activity.id} className="flex items-start gap-4">
               <div className="relative flex flex-col items-center">
                 <div className={cn(
-                  "w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300",
+                  "w-9 h-9 rounded-xl flex items-center justify-center",
                   isCompleted 
-                    ? "bg-atlas-gold/10 border border-atlas-gold/20 group-hover:bg-atlas-gold/15" 
-                    : "bg-atlas-bg-tertiary border border-atlas-border group-hover:border-atlas-border/80"
+                    ? "bg-atlas-gold/10 border border-atlas-gold/20" 
+                    : "bg-atlas-bg-tertiary border border-atlas-border"
                 )}>
                   <Icon className={cn(
-                    "w-4 h-4 transition-colors duration-300",
+                    "w-4 h-4",
                     isCompleted ? "text-atlas-gold" : "text-atlas-text-secondary"
                   )} />
                 </div>
@@ -53,10 +53,10 @@ export function RecentActivity({ activities }: RecentActivityProps) {
               <div className={cn("flex-1", !isLast && "pb-4")}>
                 <div className="flex items-center justify-between mb-1">
                   <span className={cn(
-                    "text-sm font-medium transition-colors duration-300",
+                    "text-sm font-medium",
                     isCompleted 
-                      ? "text-atlas-text-primary group-hover:text-atlas-gold"
-                      : "text-atlas-text-secondary group-hover:text-atlas-text-primary"
+                      ? "text-atlas-text-primary"
+                      : "text-atlas-text-secondary"
                   )}>
                     {activity.title}
                   </span>

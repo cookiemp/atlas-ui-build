@@ -12,7 +12,7 @@ export function ExpeditionCard({ expedition, onClick, onDelete }: ExpeditionCard
   return (
     <div 
       onClick={onClick}
-      className="premium-card group relative overflow-hidden cursor-pointer"
+      className="premium-card premium-card-interactive group relative overflow-hidden cursor-pointer"
     >
       {/* Delete Button — Appears on hover with smooth fade */}
       {onDelete && (

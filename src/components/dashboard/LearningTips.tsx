@@ -38,14 +38,14 @@ export function LearningTips() {
         {tips.map((tip) => (
           <div 
             key={tip.id}
-            className="p-4 rounded-xl bg-atlas-bg-tertiary/40 hover:bg-atlas-bg-tertiary/70 transition-all duration-300 group cursor-pointer hover:translate-x-1"
+            className="p-4 rounded-xl bg-atlas-bg-tertiary/40"
           >
             <div className="flex items-start gap-3">
-              <div className="w-7 h-7 rounded-lg bg-atlas-gold/8 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-atlas-gold/15 transition-colors duration-300">
+              <div className="w-7 h-7 rounded-lg bg-atlas-gold/8 flex items-center justify-center flex-shrink-0 mt-0.5">
                 <tip.icon className="w-3.5 h-3.5 text-atlas-gold" />
               </div>
               <div>
-                <h4 className="text-sm font-medium text-atlas-text-primary mb-1 group-hover:text-atlas-gold transition-colors duration-300">
+                <h4 className="text-sm font-medium text-atlas-text-primary mb-1">
                   {tip.title}
                 </h4>
                 <p className="text-xs text-atlas-text-secondary leading-relaxed">
