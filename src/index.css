@@ -307,10 +307,14 @@
   background: hsl(var(--atlas-bg-secondary));
   border: 1px solid hsl(var(--atlas-border));
   border-radius: 1rem;
+}
+
+/* Only clickable cards get hover effects */
+.premium-card-interactive {
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.premium-card:hover {
+.premium-card-interactive:hover {
   border-color: hsla(var(--atlas-gold) / 0.35);
   transform: translateY(-3px);
   box-shadow: 0 12px 40px -12px hsla(var(--atlas-gold) / 0.08);

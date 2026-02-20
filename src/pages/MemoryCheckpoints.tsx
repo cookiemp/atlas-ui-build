@@ -25,12 +25,12 @@ function CheckpointCard({ checkpoint, isUpcoming = false }: { checkpoint: Memory
 
   return (
     <div className={cn(
-      "checkpoint-card premium-card p-6 cursor-pointer group",
-      isUpcoming ? "opacity-70 hover:opacity-100" : ""
+      "premium-card p-6",
+      isUpcoming ? "opacity-70" : ""
     )}>
       <div className="flex items-start justify-between mb-5">
         <div className="flex-1 min-w-0">
-          <h3 className="font-display font-semibold text-lg text-atlas-text-primary truncate group-hover:text-atlas-gold transition-colors duration-300">
+          <h3 className="font-display font-semibold text-lg text-atlas-text-primary truncate">
             {checkpoint.title}
           </h3>
           <p className="text-sm text-atlas-text-secondary mt-1.5 flex items-center gap-2">
